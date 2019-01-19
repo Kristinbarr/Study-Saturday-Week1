@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 
-
 let students = [ {id:1, name: 'Dan'}, {id:2, name: 'Karen' } ]
 
 router.get('/', (req, res, next) => {
@@ -29,9 +28,12 @@ router.put('/:id',(req, res, next) => {
   const currentStudent = students.filter(student => { 
     return student.id === Number(req.params.id)
   })[0]
+
   // create updated student copy and replace only the specific key/vals
-  const updatedStudent = {...currentStudent, ...req.body}
+  const change = req.body
+  const updatedStudent = {...currentStudent, ...change}
   res.send(updatedStudent)
+  console.log(updatedStudent, req.body)
 })
 
 module.exports = router;
